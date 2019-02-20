@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "185747514215",
+    "firebase_url": "https://linuxication2k19.firebaseio.com",
+    "project_id": "linuxication2k19",
+    "storage_bucket": "linuxication2k19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185747514215:android:00473dfe95f15f98",
+        "android_client_info": {
+          "package_name": "com.example.rashmi.linuxication2k19"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "185747514215-j8hdba8c2tsn4ul07un0sb29ljn8gbqu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rashmi.linuxication2k19",
+            "certificate_hash": "426e05cfea17ef00f87db9d5a1aa2107dd02d51e"
+          }
+        },
+        {
+          "client_id": "185747514215-an58k4bq0rchi5tqe5vl36ffjqq8c93u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATNbBhnyP_qSwYdZ-nCPE6kEDUk_gMqTE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "185747514215-an58k4bq0rchi5tqe5vl36ffjqq8c93u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

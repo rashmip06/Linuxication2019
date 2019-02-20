@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Linuxication2k19</string>
+
+    <string-array name="Year">
+        <item>First</item>
+        <item>Second</item>
+        <item>Third</item>
+        <item>Fourth</item>
+        <item>Other</item>
+    </string-array>
+</resources>
