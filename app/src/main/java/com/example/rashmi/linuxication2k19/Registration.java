@@ -84,7 +84,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         stu.setRemaining((250-Integer.parseInt(fees.getText().toString())));
                         stu.setPhone(phno.getText().toString());
                         stu.setEmail(email.getText().toString());
-                        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
                         mRef=FirebaseDatabase.getInstance().getReference();
                         mRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -96,10 +96,13 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                 mRef2=FirebaseDatabase.getInstance().getReference().child(uid).child(String.valueOf(id));
 
                                 mRef2.setValue(stu);
+                                Toast.makeText(Registration.this,"REGISTRATION DONE!!",Toast.LENGTH_LONG).show();
                                 nm.setText("");
                                 clg.setText("");
                                 fees.setText("");
                                 mode.setText("");
+                                phno.setText("");
+                                email.setText("");
                             }
 
                             @Override
