@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Registration extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     String year;
-    EditText nm,clg,fees,mode;
+    EditText nm,clg,fees,mode,phno,email;
     String id;
     Button register;
     DatabaseReference mRef,mRef2;
@@ -49,6 +49,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         clg=(EditText)findViewById(R.id.College);
         fees=(EditText)findViewById(R.id.Fees);
         mode=(EditText)findViewById(R.id.mode);
+        phno=(EditText)findViewById(R.id.number);
+        email=(EditText)findViewById(R.id.email);
 
         stu=new Student();
 
@@ -80,7 +82,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         stu.setName(nm.getText().toString());
                         stu.setPaid(Integer.parseInt(fees.getText().toString()));
                         stu.setRemaining((250-Integer.parseInt(fees.getText().toString())));
-
+                        stu.setPhone(phno.getText().toString());
+                        stu.setEmail(email.getText().toString());
                         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
                         mRef=FirebaseDatabase.getInstance().getReference();
                         mRef.addListenerForSingleValueEvent(new ValueEventListener() {

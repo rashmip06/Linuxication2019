@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="62dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="17dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName" />
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/name"
-        android:layout_marginTop="158dp"
+        android:layout_marginTop="108dp"
         android:ems="10"
         android:hint="College"
         android:inputType="textPersonName" />
@@ -35,16 +35,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="259dp" />
+        android:layout_marginTop="214dp" />
 
     <EditText
         android:id="@+id/Fees"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="198dp"
-        android:layout_marginStart="46dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="25dp"
         android:ems="10"
         android:hint="Fees Paid"
         android:inputType="textPersonName" />
@@ -55,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/Fees"
-        android:layout_marginBottom="129dp"
+        android:layout_marginBottom="90dp"
         android:ems="10"
         android:hint="Mode of Payment"
         android:inputType="textPersonName" />
@@ -66,8 +65,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="34dp"
-        android:layout_marginStart="117dp"
+        android:layout_marginBottom="14dp"
+        android:layout_marginStart="126dp"
         android:text="Register" />
 
     <TextView
@@ -76,6 +75,27 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/name"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="185dp"
         android:text="Year" />
+
+    <EditText
+        android:id="@+id/number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/Fees"
+        android:layout_marginBottom="198dp"
+        android:ems="10"
+        android:hint="Phone Number"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/mode"
+        android:layout_alignStart="@+id/Fees"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textPersonName" />
 </RelativeLayout>

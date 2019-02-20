@@ -6,6 +6,8 @@ public class Student {
     String college;
     String year;
     int paid;
+    String phone;
+    String email;
     int remaining;
     String mode;
 
@@ -43,6 +45,22 @@ public class Student {
 
     public void setPaid(int paid) {
         this.paid = paid;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getRemaining() {
