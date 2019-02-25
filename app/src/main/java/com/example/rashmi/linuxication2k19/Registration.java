@@ -20,6 +20,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+
 public class Registration extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     String year;
@@ -29,6 +36,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     DatabaseReference mRef,mRef2;
     Student stu;
     String uid;
+    String mobiles,authkey,senderId,message,route;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +52,17 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(Registration.this);
         register=(Button)findViewById(R.id.register);
+        //Your authentication key
+        authkey = "199192AN8u9SKkpL5a8d8d97";
+    //Multiple mobiles numbers separated by comma
+
+    //Sender ID,While using route4 sender id should be 6 characters long.
+        senderId = "LXMCUG";
+    //Your message to send, Add URL encoding here.
+
+    //define route
+        route="4";
+
 
         nm=(EditText)findViewById(R.id.name);
         clg=(EditText)findViewById(R.id.College);
@@ -75,68 +94,125 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 }
                 else
                 {
-                    if(Integer.parseInt(fees.getText().toString())<=250)
-                    {
-                        stu.setCollege(clg.getText().toString());
-                        stu.setMode(mode.getText().toString());
-                        stu.setName(nm.getText().toString());
-                        stu.setPaid(Integer.parseInt(fees.getText().toString()));
-                        stu.setRemaining((250-Integer.parseInt(fees.getText().toString())));
-                        stu.setPhone(phno.getText().toString());
-                        stu.setEmail(email.getText().toString());
+                    if(fees.getText().toString().matches("[0-9]+")) {
+                        if (Integer.parseInt(fees.getText().toString()) <= 250 ) {
 
-                        mRef=FirebaseDatabase.getInstance().getReference();
-                        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                int id=Integer.parseInt(dataSnapshot.child("Count").getValue().toString());
-                                ++id;
-                                Log.d("Inside ondata change","inside on data change");
-                                mRef.child("Count").setValue(id);
-                                mRef2=FirebaseDatabase.getInstance().getReference().child(uid).child(String.valueOf(id));
+                            if(phno.length()==10 ) {
+                                if(phno.getText().toString().matches("[0-9]+")) {
+                                    stu.setCollege(clg.getText().toString());
+                                    stu.setMode(mode.getText().toString());
+                                    stu.setName(nm.getText().toString());
+                                    stu.setPaid(Integer.parseInt(fees.getText().toString()));
+                                    stu.setRemaining((250 - Integer.parseInt(fees.getText().toString())));
+                                    stu.setPhone(phno.getText().toString());
+                                    stu.setEmail(email.getText().toString());
 
-                                mRef2.setValue(stu);
-                                Toast.makeText(Registration.this,"REGISTRATION DONE!!",Toast.LENGTH_LONG).show();
-                                nm.setText("");
-                                clg.setText("");
-                                fees.setText("");
-                                mode.setText("");
-                                phno.setText("");
-                                email.setText("");
+                                    mRef = FirebaseDatabase.getInstance().getReference();
+                                    mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            int id = Integer.parseInt(dataSnapshot.child("Count").getValue().toString());
+                                            ++id;
+                                            Log.d("Inside ondata change", "inside on data change");
+                                            mRef.child("Count").setValue(id);
+                                            mRef2 = FirebaseDatabase.getInstance().getReference().child(uid).child(String.valueOf(id));
+
+                                            mRef2.setValue(stu);
+                                            Toast.makeText(Registration.this, "REGISTRATION DONE!!", Toast.LENGTH_LONG).show();
+                                            mobiles=phno.getText().toString();
+                                            id=id+100;
+                                            if(stu.getRemaining()==0)
+                                            {
+                                                message="Thank You for registering for Linuxication 2K19.\nYour registration Id : LX-"+id+"\nTEAM MCUG";
+                                            }
+                                            else
+                                            {
+                                                message="Thank You for registering for Linuxication 2K19.\nYour registration Id : LX-"+id+"\nRemaining fees: "+stu.getRemaining()+"\nTEAM MCUG";
+                                            }
+
+
+                                            new Thread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    URLConnection myURLConnection=null;
+                                                    URL myURL=null;
+                                                    BufferedReader reader=null;
+
+//encoding message
+                                                    String encoded_message= URLEncoder.encode(message);
+
+
+                                                    String mainUrl="http://api.msg91.com/api/sendhttp.php?";
+
+                                                    StringBuilder sbPostData= new StringBuilder(mainUrl);
+                                                    sbPostData.append("authkey="+authkey);
+                                                    sbPostData.append("&mobiles="+mobiles);
+                                                    sbPostData.append("&message="+encoded_message);
+                                                    sbPostData.append("&route="+route);
+                                                    sbPostData.append("&sender="+senderId);
+
+
+                                                    mainUrl = sbPostData.toString();
+                                                    try
+                                                    {
+                                                        //prepare connection
+                                                        myURL = new URL(mainUrl);
+                                                        myURLConnection = myURL.openConnection();
+                                                        myURLConnection.connect();
+                                                        reader= new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
+
+                                                        //reading response
+                                                        String response;
+                                                        while ((response = reader.readLine()) != null)
+                                                            //print response
+                                                            Log.d("RESPONSE", ""+response);
+
+                                                        //finally close connection
+                                                        reader.close();
+                                                    }
+                                                    catch (IOException e)
+                                                    {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            }).start();
+
+                                            nm.setText("");
+                                            clg.setText("");
+                                            fees.setText("");
+                                            mode.setText("");
+                                            phno.setText("");
+                                            email.setText("");
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+                                    });
+                                }
+                                else
+                                {
+                                    phno.setError("Phone number should contain only digits");
+                                }
                             }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
+                            else
+                            {
+                                phno.setError("Phone number should contain 10 digits");
                             }
-                        });
+                        }
+                        else
+                        {
+                            fees.setError("Please Reenter value less than 250");
+                        }
                     }
                     else
                     {
-                        fees.setError("Please Reenter value less than 250");
+                        fees.setError("Please write numbers");
                     }
 
 
-                  /*  mRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            int id=Integer.parseInt(dataSnapshot.child("Count").getValue().toString());
-                            ++id;
-                            Log.d("Inside ondata change","inside on data change");
-                            mRef.child("Count").setValue(id);
-                            mRef2=FirebaseDatabase.getInstance().getReference().child(uid).child(dataSnapshot.child("Count").getValue().toString());
-                            mRef2.setValue(stu);
-                            nm.setText("");
-                            clg.setText("");
-                            fees.setText("");
-                            mode.setText("");
-                        }
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });*/
 
 
                 }

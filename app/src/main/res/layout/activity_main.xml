@@ -10,10 +10,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/username"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/username"
-        android:layout_marginTop="73dp"
+        android:layout_marginTop="208dp"
         android:text="Username"
         tools:text="Username" />
 
@@ -21,23 +20,17 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="117dp"
+        android:layout_centerInParent="true"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="65dp" />
+        android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginTop="210dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/pass"
+        android:layout_marginBottom="211dp"
         android:text="Password"
         tools:text="Password" />
 
@@ -45,22 +38,19 @@
         android:id="@+id/pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="132dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:layout_alignLeft="@+id/textView" />
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="139dp"
-        android:layout_marginLeft="135dp"
-        android:layout_marginStart="135dp"
+        android:layout_marginBottom="46dp"
+        android:layout_toEndOf="@+id/textView"
         android:text="Login"
         tools:text="Login" />
 
@@ -71,6 +61,15 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/username"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="28dp"
+        app:srcCompat="@drawable/mcug" />
 
 
 </RelativeLayout>
